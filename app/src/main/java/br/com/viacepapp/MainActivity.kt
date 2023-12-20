@@ -5,9 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -54,7 +54,7 @@ fun HomeViaCep(
             modifier = modifier
                 .padding(paddingValues = paddingValues)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             ComponentOutlinedTextField(modifier = modifier, label = "CEP")
             ComponentOutlinedTextField(modifier = modifier, label = "Lograduro")
@@ -63,10 +63,13 @@ fun HomeViaCep(
             ComponentOutlinedTextField(modifier = modifier, label = "Cidade")
             ComponentOutlinedTextField(modifier = modifier, label = "Estado")
             ComponentOutlinedTextField(modifier = modifier, label = "Complemento")
+            Spacer(modifier = modifier.heightIn(16.dp))
             Button(
                 modifier = modifier
                     .fillMaxWidth()
-                    .heightIn(58.dp),
+                    .heightIn(58.dp)
+                    .padding(start = 10.dp, end = 10.dp)
+                ,
                 onClick = { /*TODO*/ }) {
                 
             }
@@ -92,6 +95,7 @@ fun ComponentOutlinedTextField(
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
+            .padding(paddingValues = PaddingValues(start = 10.dp, end = 10.dp))
         ,
         value = "",
         label = { Text(label) },
