@@ -8,13 +8,13 @@ data class HomeViaCepUiState(
     val cidade: String = "",
     val estado: String = "",
     val complemento: String = "",
-    val onCepChange: () -> Unit = { },
-    val onLogradouroChange: () -> Unit = {},
-    val onNumeroChange: () -> Unit = {},
-    val onBairroChange: () -> Unit = {},
-    val onCidadeChange: () -> Unit = {},
-    val onEstadoChange: () -> Unit = {},
-    val onComplementoChange: () -> Unit = {},
+    val onCepChange: (value:String) -> Unit = {},
+    val onLogradouroChange: (value:String) -> Unit = {},
+    val onNumeroChange: (value:String) -> Unit = {},
+    val onBairroChange: (value:String) -> Unit = {},
+    val onCidadeChange: (value:String) -> Unit = {},
+    val onEstadoChange: (value:String) -> Unit = {},
+    val onComplementoChange: (value:String) -> Unit = {},
     val onButtonClick: () -> Unit = {}
 
 )

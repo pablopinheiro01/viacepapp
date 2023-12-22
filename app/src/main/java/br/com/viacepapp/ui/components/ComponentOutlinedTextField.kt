@@ -18,7 +18,7 @@ fun ComponentOutlinedTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
-    onValueChange: () -> Unit = {}
+    onValueChange: (value: String) -> Unit = {}
 ) {
     OutlinedTextField(
         modifier = modifier
@@ -27,7 +27,7 @@ fun ComponentOutlinedTextField(
         ,
         value = value,
         label = { Text(label) },
-        onValueChange = {onValueChange()}
+        onValueChange = { onValueChange(it) }
     )
 }
 

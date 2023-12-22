@@ -37,14 +37,16 @@ fun HomeViaCepScreen(
         cidade = state.cidade,
         estado = state.estado,
         complemento = state.complemento,
-        onCepChange = state.onCepChange,
-        onLogradouroChange = state.onLogradouroChange,
-        onNumeroChange = state.onNumeroChange,
-        onBairroChange = state.onBairroChange,
-        onCidadeChange = state.onCidadeChange,
-        onEstadoChange = state.onEstadoChange,
-        onComplementoChange = state.onComplementoChange,
-        onButtonClick = state.onButtonClick
+        onCepChange = {
+            state.onCepChange(it)
+        },
+        onLogradouroChange = { state.onLogradouroChange(it) },
+        onNumeroChange = { state.onNumeroChange(it) },
+        onBairroChange = { state.onBairroChange(it) },
+        onCidadeChange = { state.onCidadeChange(it) },
+        onEstadoChange = { state.onEstadoChange(it) },
+        onComplementoChange = { state.onComplementoChange(it) },
+        onButtonClick = { state.onButtonClick() }
     )
 
 }
@@ -60,13 +62,13 @@ fun HomeViaCepScreen(
     cidade: String = "",
     estado: String = "",
     complemento: String = "",
-    onCepChange: () -> Unit = { },
-    onLogradouroChange: () -> Unit = {},
-    onNumeroChange: () -> Unit = {},
-    onBairroChange: () -> Unit = {},
-    onCidadeChange: () -> Unit = {},
-    onEstadoChange: () -> Unit = {},
-    onComplementoChange: () -> Unit = {},
+    onCepChange: (value: String) -> Unit = { },
+    onLogradouroChange: (value: String) -> Unit = {},
+    onNumeroChange: (value: String) -> Unit = {},
+    onBairroChange: (value: String) -> Unit = {},
+    onCidadeChange: (value: String) -> Unit = {},
+    onEstadoChange: (value: String) -> Unit = {},
+    onComplementoChange: (value: String) -> Unit = {},
     onButtonClick: () -> Unit = {}
 ) {
     Scaffold(
@@ -83,42 +85,44 @@ fun HomeViaCepScreen(
                 modifier = modifier,
                 label = "CEP",
                 value = cep,
-                onValueChange = onCepChange
+                onValueChange = { value ->
+                    onCepChange(value)
+                }
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = logradouro,
-                onValueChange = onLogradouroChange,
+                onValueChange = { onLogradouroChange(it) },
                 label = "Lograduro"
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = numero,
-                onValueChange = onNumeroChange,
+                onValueChange = { onNumeroChange(it) },
                 label = "Número"
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = bairro,
-                onValueChange = onBairroChange,
+                onValueChange = { onBairroChange(it) },
                 label = "Bairro"
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = cidade,
-                onValueChange = onCidadeChange,
+                onValueChange = { onCidadeChange(it) },
                 label = "Cidade"
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = estado,
-                onValueChange = onEstadoChange,
+                onValueChange = { onEstadoChange(it) },
                 label = "Estado"
             )
             ComponentOutlinedTextField(
                 modifier = modifier,
                 value = complemento,
-                onValueChange = onComplementoChange,
+                onValueChange = { onComplementoChange(it) },
                 label = "Complemento"
             )
             Spacer(modifier = modifier.heightIn(16.dp))
@@ -127,7 +131,7 @@ fun HomeViaCepScreen(
                     .fillMaxWidth()
                     .heightIn(58.dp)
                     .padding(start = 10.dp, end = 10.dp),
-                onClick = { onButtonClick }) {
+                onClick = { onButtonClick() }) {
                 Text(text = "Pesquisar")
             }
         }
