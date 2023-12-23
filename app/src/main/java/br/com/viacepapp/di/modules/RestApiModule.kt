@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +18,7 @@ object RestApiModule{
 
     @Provides
     @Singleton
+    @ViaCepRetrofit
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("http://viacep.com.br/")
@@ -27,7 +29,7 @@ object RestApiModule{
 
     @Provides
     @Singleton
-    fun provideViaCepService(retrofit: Retrofit): ViaCepService{
+    fun provideViaCepService(@ViaCepRetrofit retrofit: Retrofit): ViaCepService{
         return retrofit.create(ViaCepService::class.java)
     }
 
@@ -49,3 +51,7 @@ object RestApiModule{
 
 
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ViaCepRetrofit
