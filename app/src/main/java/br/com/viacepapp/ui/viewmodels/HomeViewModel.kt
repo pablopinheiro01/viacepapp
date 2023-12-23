@@ -85,17 +85,28 @@ class HomeViewModel @Inject constructor(
         currentUiStateJob?.cancel()
         currentUiStateJob = viewModelScope.launch {
             delay(4000L)
-            val endereco = repository.search(cep)
-            Log.i("HomeViewModel", "search: $endereco")
+//            val endereco = repository.search(cep)
+//            Log.i("HomeViewModel", "search: $endereco")
+//
+//            if (endereco.logradouro.isNotEmpty()) {
+//                _uiState.value = _uiState.value.copy(
+//                    cep = endereco.cep,
+//                    bairro = endereco.bairro,
+//                    logradouro = endereco.logradouro,
+//                    estado = endereco.uf,
+//                    cidade = endereco.localidade
+//                )
+//            }
 
-            if (endereco.logradouro.isNotEmpty()) {
-                _uiState.value = _uiState.value.copy(
-                    cep = endereco.cep,
-                    bairro = endereco.bairro,
-                    logradouro = endereco.logradouro,
-                    estado = endereco.uf,
-                    cidade = endereco.localidade
-                )
+            repository.search(cep).let { address ->
+                _uiState.update {
+                    it.copy(
+                        logradouro = address.logradouro,
+                        bairro = address.bairro,
+                        estado = address.uf,
+                        cidade = address.localidade
+                    )
+                }
             }
         }
     }
